@@ -28,8 +28,8 @@ class FewShotEventModel(nn.Module):
         You need to set self.cost as your own loss function.
         '''
         nn.Module.__init__(self)
-        #self.sentence_encoder = nn.DataParallel(my_sentence_encoder)
-        self.sentence_encoder = my_sentence_encoder
+        self.sentence_encoder = nn.DataParallel(my_sentence_encoder)
+        #self.sentence_encoder = my_sentence_encoder
         self.cost = nn.CrossEntropyLoss()
         
     def forward(self, support, query, N, K, Q):
@@ -254,7 +254,7 @@ class FewShotEventFramework:
         '''
         print("###################################################")
         
-        #model.eval()
+        
         if ckpt is None:
             print("Use val dataset")
             eval_dataset = self.val_data_loader
@@ -264,6 +264,7 @@ class FewShotEventFramework:
                 model_CKPT = torch.load(ckpt)
                 model.load_state_dict(model_CKPT['state_dict'])
             eval_dataset = self.test_data_loader
+        model.eval()
 
         iter_right = 0.0
         iter_sample = 0.0

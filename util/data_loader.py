@@ -27,14 +27,14 @@ class FewEventDataset(data.Dataset):
         #self.encoder_name = encoder_name
         self.max_length = encoder.max_length
         self.types=types
-        self.seq=list(itertools.combinations(range(len(self.classes)), self.N))
-        np.random.shuffle(self.seq)
-        print(len(self.seq))
+        #self.seq=list(itertools.combinations(range(len(self.classes)), self.N))
+        #np.random.shuffle(self.seq)
+        #print(len(self.seq))
         if eng:
             if types=='train':
                 self.classes=self.classes[:80]
-            elif types=='val':
-                self.classes=self.classes[80:90]
+            elif types=='test':
+                self.classes=self.classes[80:]
             else:
                 self.classes=self.classes[90:]
         
@@ -47,8 +47,8 @@ class FewEventDataset(data.Dataset):
     
     def __getitem__(self, index):
         
-        #target_classes = random.sample(self.classes, self.N)
-        target_classes = [self.classes[i] for i in self.seq[index%len(self.seq)]]
+        target_classes = random.sample(self.classes, self.N)
+        #target_classes = [self.classes[i] for i in self.seq[index%len(self.seq)]]
         #print(index,target_classes)
         support_set = {'word': [],  'mask': [] }
         query_set = {'word': [],  'mask': [] }

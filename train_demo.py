@@ -72,7 +72,7 @@ def main():
                         help='encoder: cnn or bert or roberta')
     parser.add_argument('--bert_type', default='fin',
                         help='en,ch,fin')
-    parser.add_argument('--max_length', default=128, type=int,
+    parser.add_argument('--max_length', default=192, type=int,
                         help='max length')
     parser.add_argument('--lr', default=-1, type=float,
                         help='learning rate')
